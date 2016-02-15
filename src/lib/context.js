@@ -12,6 +12,7 @@ if (global && !global.navigator) {
 let _title = '';
 let _store = null;
 export const history = canUseDOM ? browserHistory : createMemoryHistory();
+export const socket = canUseDOM ? io.connect('//localhost:8222') : null; // eslint-disable-line
 
 export function initDOM(req) {
   if (!canUseDOM && req.headers['user-agent']) {

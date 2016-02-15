@@ -72,3 +72,5 @@ const server = app.listen(process.env.PORT || __PORT__, () => {
     console.log('__DEV_START__');
   }
 });
+
+export const io = require('socket.io')(server);

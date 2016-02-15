@@ -1,84 +1,54 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import styles from './HomePage.scss';
-import {
-  Avatar,
-  Card,
-  CardHeader,
-  CardMedia,
-} from 'material-ui';
-import { setTitle } from 'lib/context';
-import { getStars } from 'modules/github';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Loading from 'components/Loading';
+import { setTitle, socket } from 'lib/context';
 
-function mapStateToProps(state) {
-  const { stars, isLoading, error } = state.github;
-  return {
-    stars,
-    isLoading,
-    error,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    getStars,
-  }, dispatch);
-}
+const channels = [];
 
 class HomePage extends Component {
-  static needs = [
-    getStars,
-  ];
-
-  static propTypes = {
-    stars: PropTypes.array,
-    getStars: PropTypes.func,
-    isLoading: PropTypes.bool,
-    error: PropTypes.object,
-  };
+  constructor() {
+    super();
+  }
 
   componentDidMount() {
-    if (!this.props.stars.length) {
-      this.props.getStars();
-    }
+    socket.on('join channel', data => {
+      const {
+        username,
+        channel,
+      } = data;
+      channels.push({
+        username,
+        channel,
+      });
+    });
+    console.log(socket);
   }
 
   render() {
-    const { stars, isLoading, error } = this.props;
-    setTitle('HomePage');
-    if (error) {
-      return (
-        <div className={styles.HomePage}>
-          <p>Failed to load github stars, checkout network status or github api changes.</p>
-        </div>
-      );
-    }
-
+    setTitle('CloudBread Socket.IO Chatting');
     return (
       <div className={styles.HomePage}>
-        <h1>People liked this package:</h1>
-        {
-          stars.map((star, idx) => (
-            <a href={star.html_url} target="_blank" className={styles.Card} key={idx}>
-              <Card>
-                <CardHeader
-                  title={star.login}
-                  subtitle="Liked this package"
-                  avatar={<Avatar>{star.login[0]}</Avatar>}
-                />
-                <CardMedia>
-                  <img src={star.avatar_url} />
-                </CardMedia>
-              </Card>
-            </a>
-          ))
-        }
-        <Loading show={isLoading} />
+        <div>
+          <input type="text" placeholder="Username" ref="username" />
+          <input type="text" placeholder="Channel Name" ref="channel" />
+          <button type="button">Connect to Channel</button>
+        </div>
+        {channels.map((channel, idx) => (
+          <div key={idx}>
+            <h1>{channel.title}</h1>
+          </div>
+        ))}
       </div>
     );
   }
+
+  handleClickConnectToChannel() {
+    const username = this.refs.username.getValue();
+    const channel = this.refs.channel.getValue();
+    socket.emit('join channel', {
+      username,
+      channel,
+    });
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

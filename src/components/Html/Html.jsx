@@ -28,6 +28,7 @@ class Html extends Component {
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          <script src="/socket.io/socket.io.js" />
           <script
             dangerouslySetInnerHTML={{
               __html: `window.__SYNC_DATA = ${serialize(store.getState())};`,
