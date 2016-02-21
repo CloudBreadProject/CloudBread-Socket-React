@@ -1,54 +1,54 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import styles from './HomePage.scss';
 import { setTitle, socket } from 'lib/context';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { authenticateSocket } from 'modules/auth';
 
-const channels = [];
+const mapDispatchToState = (dispatch) => bindActionCreators({
+  authenticateSocket,
+}, dispatch);
 
 class HomePage extends Component {
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
+  static propTypes = {
+    authenticateSocket: PropTypes.func,
+  };
+
   constructor() {
     super();
+    this.handleClickAuthorize = this.handleClickAuthorize.bind(this);
   }
 
   componentDidMount() {
-    socket.on('join channel', data => {
-      const {
-        username,
-        channel,
-      } = data;
-      channels.push({
-        username,
-        channel,
-      });
+    socket.on('authorized', ({ user }) => {
+      this.props.authenticateSocket(user);
+      this.context.router.push('/chatting');
     });
-    console.log(socket);
   }
 
   render() {
-    setTitle('CloudBread Socket.IO Chatting');
+    setTitle('CloudBread Socket.IO Chatting Example');
     return (
       <div className={styles.HomePage}>
+        <h1>CloudBread Socket.IO Chatting Example</h1>
         <div>
-          <input type="text" placeholder="Username" ref="username" />
-          <input type="text" placeholder="Channel Name" ref="channel" />
-          <button type="button">Connect to Channel</button>
+          <input type="text" ref="username" placeholder="Username" />
+          <button type="button" onClick={this.handleClickAuthorize}>Authorize</button>
         </div>
-        {channels.map((channel, idx) => (
-          <div key={idx}>
-            <h1>{channel.title}</h1>
-          </div>
-        ))}
       </div>
     );
   }
 
-  handleClickConnectToChannel() {
-    const username = this.refs.username.getValue();
-    const channel = this.refs.channel.getValue();
-    socket.emit('join channel', {
-      username,
-      channel,
-    });
+  handleClickAuthorize() {
+    const data = {
+      username: this.refs.username.value,
+    };
+    socket.emit('authenticate user', data);
   }
 }
 
-export default HomePage;
+export default connect(null, mapDispatchToState)(HomePage);

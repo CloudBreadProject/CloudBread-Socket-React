@@ -59,7 +59,7 @@ app.get('*', (req, res) => {
         res.status(404).send('Not found');
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.stack);
       res.status(500).send('server error');
     }
   });

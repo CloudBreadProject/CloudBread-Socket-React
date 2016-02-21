@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from 'layouts/App';
-import Header from 'components/Header';
 
 describe('<App />', () => {
   it('renders as a <div>', () => {
@@ -19,10 +18,5 @@ describe('<App />', () => {
       </App>
     );
     expect(wrapper.contains(children)).to.equal(true);
-  });
-
-  it('contains <Header />', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.contains(<Header />)).to.equal(true);
   });
 });
