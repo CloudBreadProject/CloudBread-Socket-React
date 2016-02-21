@@ -1,5 +1,6 @@
 # CloudBread-Socket-React
 
+[![Build Status](https://travis-ci.org/CloudBreadProject/CloudBread-Socket-React.svg?branch=master)](https://travis-ci.org/CloudBreadProject/CloudBread-Socket-React)
 [![bitHound Overall Score](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/score.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React)
 [![bitHound Dependencies](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/dependencies.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/devDependencies.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/master/dependencies/npm)
