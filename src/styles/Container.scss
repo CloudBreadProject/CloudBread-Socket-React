@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+$paddingVertical: 10px;
+$width: calc($maxContentWidth - ($paddingVertical * 2));
+
+:local .Container {
+  max-width: $width;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+:local .PrimaryBox {
+  color: #fff;
+  background: #00bcd4;
+}
