@@ -1,8 +1,8 @@
-# React Universal Starter Kit
-![Dependency Badge](https://david-dm.org/Beingbook/react-universal-starter-kit.svg)
-![Build Badge](https://travis-ci.org/Beingbook/react-universal-starter-kit.svg)
+# CloudBread-Socket-React
 
-Quick start react package. See [this live](http://react-universe.herokuapp.com/)
+CloudBread game server real-time communication project CloudBread-Socket - a client example
+
+This project is designed for CloudBread mobile game & app server engine to implement real-time bidirectional communication.
 
 ## Features
 
@@ -117,3 +117,6 @@ Run `tree -L 2 -I 'node_modules|build|.git|.DS_Store' -A -a` then you will see b
     ├── run.js
     └── tasks       # build, deploy, serve, etc...
 ```
+
+## License
+MIT license
