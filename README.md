@@ -1,25 +1,19 @@
 # CloudBread-Socket-React
 
-CloudBread game server real-time communication project CloudBread-Socket - a client example
+[![bitHound Overall Score](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/score.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React)
+[![bitHound Dependencies](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/dependencies.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/devDependencies.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/code.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React)
 
+CloudBread game server real-time communication project CloudBread-Socket client example.
 This project is designed for CloudBread mobile game & app server engine to implement real-time bidirectional communication.
-
-## Features
-
-* Babel 6, ES2015 + ES7
-* Webpack, development and production
-* React 0.14.x, react-router
-* HMR, reloading page through
-* Karma, Mocha test
-* Airbnb config eslint
-* Sass like css loaders
-* MaterialUI to provide better UI
+See [live demo](http://hbh-cloudbread-socket-client.azurewebsites.net/)
 
 ## Installation
 
 ```sh
-git clone https://github.com/Beingbook/react-universal-starter-kit.git
-cd react-universal-starter-kit
+git clone https://github.com/CloudBreadProject/CloudBread-Socket-React
+cd CloudBread-Socket-React
 npm i # alias to install
 ```
 
