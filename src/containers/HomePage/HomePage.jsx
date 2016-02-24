@@ -4,9 +4,20 @@ import { setTitle, socket } from 'lib/context';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { authenticateSocket } from 'modules/auth';
+import { showSnackbarMessage } from 'modules/AppLayout';
+import {
+  TextField,
+  RaisedButton,
+  Paper,
+} from 'material-ui';
+
+const mapStateToProps = ({ auth }) => ({
+  isSocketAuthenticated: auth.isSocketAuthenticated,
+});
 
 const mapDispatchToState = (dispatch) => bindActionCreators({
   authenticateSocket,
+  showSnackbarMessage,
 }, dispatch);
 
 class HomePage extends Component {
@@ -16,18 +27,33 @@ class HomePage extends Component {
 
   static propTypes = {
     authenticateSocket: PropTypes.func,
+    showSnackbarMessage: PropTypes.func,
+    isSocketAuthenticated: PropTypes.bool,
   };
 
   constructor() {
     super();
-    this.handleClickAuthorize = this.handleClickAuthorize.bind(this);
+    this.authenticate = this.authenticate.bind(this);
   }
 
   componentDidMount() {
+    if (this.props.isSocketAuthenticated) {
+      this.context.router.push('/chatting');
+      this.props.showSnackbarMessage({
+        snackbarMessage: 'Already authenticated, if needed you can refresh',
+      });
+    }
     socket.on('authorized', ({ user }) => {
       this.props.authenticateSocket(user);
+      this.props.showSnackbarMessage({
+        snackbarMessage: 'Authentication succeed',
+      });
       this.context.router.push('/chatting');
     });
+  }
+
+  componentWillUnmount() {
+    socket.removeListener('authorized');
   }
 
   render() {
@@ -35,20 +61,29 @@ class HomePage extends Component {
     return (
       <div className={styles.HomePage}>
         <h1>CloudBread Socket.IO Chatting Example</h1>
-        <div>
-          <input type="text" ref="username" placeholder="Username" />
-          <button type="button" onClick={this.handleClickAuthorize}>Authorize</button>
-        </div>
+        <Paper className={styles.Paper}>
+          <TextField
+            floatingLabelText="Username"
+            hintText="BlahBlah Something"
+            ref="username"
+            onEnterKeyDown={this.authenticate}
+          />
+          <RaisedButton
+            label="Authorize"
+            primary
+            onClick={this.authenticate}
+          />
+        </Paper>
       </div>
     );
   }
 
-  handleClickAuthorize() {
+  authenticate() {
     const data = {
-      username: this.refs.username.value,
+      username: this.refs.username.getValue(),
     };
     socket.emit('authenticate user', data);
   }
 }
 
-export default connect(null, mapDispatchToState)(HomePage);
+export default connect(mapStateToProps, mapDispatchToState)(HomePage);

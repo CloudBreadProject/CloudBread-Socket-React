@@ -9,33 +9,66 @@ import {
   addMessage,
   addUserToChannel,
 } from 'modules/chat';
+import { showSnackbarMessage } from 'modules/AppLayout';
+import {
+  Paper,
+  TextField,
+  RaisedButton,
+} from 'material-ui';
 
 const mapStateToProps = (state) => ({
   channels: state.chat.channels,
+  isSocketAuthenticated: state.auth.isSocketAuthenticated,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addChannel,
   addUserToChannel,
   addMessage,
+  showSnackbarMessage,
 }, dispatch);
 
 class ChattingPage extends Component {
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
   static propTypes = {
     channels: PropTypes.object,
     addChannel: PropTypes.func,
     addUserToChannel: PropTypes.func,
     addMessage: PropTypes.func,
+    showSnackbarMessage: PropTypes.func,
+    isSocketAuthenticated: PropTypes.bool,
   };
 
   constructor() {
     super();
-    this.handleClickJoinChannel = this.handleClickJoinChannel.bind(this);
+    this.joinChannel = this.joinChannel.bind(this);
   }
 
   componentDidMount() {
+    if (!this.props.isSocketAuthenticated) {
+      return this.context.router.push('/');
+    }
     socket.on('channel connected', ({ channel }) => {
       this.props.addChannel({ channel });
+      this.props.showSnackbarMessage({
+        snackbarMessage: `channel ${channel.link} has connected`,
+      });
+      this.refs.link.setValue('');
+      this.setState({
+        isConnectingChannel: false,
+      });
+      this.forceUpdate();
+    });
+    socket.on('join channel error', () => {
+      this.setState({
+        isConnectingChannel: false,
+      });
+      this.props.showSnackbarMessage({
+        snackbarMessage: `failed to connect channel ${this.reefs.link.getValue()}`,
+      });
       this.forceUpdate();
     });
     socket.on('user joined', ({ user, channel }) => {
@@ -51,8 +84,16 @@ class ChattingPage extends Component {
     });
   }
 
+  componentWillUnmount() {
+    socket.removeListener('join channel error');
+    socket.removeListener('user joined');
+    socket.removeListener('new message');
+    socket.removeListener('channel connected');
+  }
+
   render() {
     const { channels } = this.props;
+    const { isConnectingChannel } = this.state || {};
     setTitle('CloudBread Socket.IO Chatting Example with Multiple Channels');
     const channelList = [];
     for (const key in channels) { // eslint-disable-line
@@ -61,23 +102,36 @@ class ChattingPage extends Component {
     }
     return (
       <div className={styles.ChattingPage}>
-        <div>
+        <Paper className={styles.Paper}>
           <h1>Join Channel</h1>
-          <input type="text" ref="link" placeholder="Channel ID" />
-          <button type="button" onClick={this.handleClickJoinChannel}>Submit</button>
-        </div>
+          <TextField
+            ref="link"
+            floatingLabelText="Channel Short ID"
+            hintText="CloudBread"
+            onEnterKeyDown={this.joinChannel}
+            disabled={isConnectingChannel}
+          />
+          <RaisedButton
+            label="Join"
+            secondary
+            onClick={this.joinChannel}
+            disabled={isConnectingChannel}
+          />
+        </Paper>
         <div>
-          <h1>Channel List</h1>
           {channelList}
         </div>
       </div>
     );
   }
 
-  handleClickJoinChannel() {
+  joinChannel() {
     const data = {
-      link: this.refs.link.value,
+      link: this.refs.link.getValue(),
     };
+    this.setState({
+      isConnectingChannel: true,
+    });
     socket.emit('join channel', data);
   }
 }

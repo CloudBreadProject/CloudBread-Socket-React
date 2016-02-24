@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { socket } from 'lib/context';
+import {
+  Paper,
+  TextField,
+  RaisedButton,
+} from 'material-ui';
+import styles from './ChattingBox.scss';
 
 class ChattingBox extends Component {
   static propTypes = {
@@ -9,37 +15,47 @@ class ChattingBox extends Component {
 
   constructor() {
     super();
-    this.handleClickSend = this.handleClickSend.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   render() {
     const { link, messages } = this.props;
 
     return (
-      <div>
+      <Paper className={styles.Paper}>
         <h1>#{link}</h1>
-        <ul>
+        {messages.length ? '' : <p>No one connected or chatted</p>}
+        <ul className={styles.Logs}>
           {messages.map((message, idx) => (
             <li key={idx}>
-              <span>{message.username}</span>
-              <span>{message.content}</span>
+              <span className={styles.Author}>{message.username}</span>
+              <span className={styles.Content}>{message.content}</span>
             </li>
           ))}
         </ul>
         <div>
-          <input type="text" ref="content" placeholder="message here" />
-          <button type="button" onClick={this.handleClickSend}>Send</button>
+          <TextField
+            ref="content"
+            floatingLabelText="Message"
+            hintText="blahblah something"
+            onEnterKeyDown={this.sendMessage}
+          />
+          <RaisedButton
+            label="Send"
+            onClick={this.sendMessage}
+          />
         </div>
-      </div>
+      </Paper>
     );
   }
 
-  handleClickSend() {
+  sendMessage() {
     const { link } = this.props;
     socket.emit('new message', {
       link,
-      content: this.refs.content.value,
+      content: this.refs.content.getValue(),
     });
+    this.refs.content.setValue('');
   }
 }
 
