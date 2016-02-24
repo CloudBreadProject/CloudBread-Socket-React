@@ -1,3 +1,7 @@
 :local .HomePage {
   composes: Container from 'styles/Container.scss';
 }
+
+.Paper {
+  padding: 20px; padding-top: 10px;
+}
