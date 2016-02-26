@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styles from './App.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { hideSnackbarMessage } from 'modules/AppLayout';
+import { hideSnackbarMessage } from 'reducers/AppLayout';
 import { Snackbar } from 'material-ui';
 
 function mapStateToProps({ AppLayout }) {

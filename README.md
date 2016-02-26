@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 # CloudBread-Socket-React
+=======
+# React Universal Starter Kit
+
+[![Build Status](https://travis-ci.org/Beingbook/react-universal-starter-kit.svg?branch=master)](https://travis-ci.org/Beingbook/react-universal-starter-kit)
+[![Dependency Status](https://david-dm.org/Beingbook/react-universal-starter-kit.svg?style=flat-square)](https://david-dm.org/Beingbook/react-universal-starter-kit)
+[![devDependency Status](https://david-dm.org/Beingbook/react-universal-starter-kit/dev-status.svg?style=flat-square)](https://david-dm.org/Beingbook/react-universal-starter-kit#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/Beingbook/react-universal-starter-kit/badges/gpa.svg)](https://codeclimate.com/github/Beingbook/react-universal-starter-kit)
+[![Issue Count](https://codeclimate.com/github/Beingbook/react-universal-starter-kit/badges/issue_count.svg)](https://codeclimate.com/github/Beingbook/react-universal-starter-kit)
+>>>>>>> 93d72b5c6a7acaf10878825f8e61e29627435bef
 
 [![Build Status](https://travis-ci.org/CloudBreadProject/CloudBread-Socket-React.svg?branch=master)](https://travis-ci.org/CloudBreadProject/CloudBread-Socket-React)
 [![bitHound Overall Score](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/score.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React)
@@ -97,7 +107,7 @@ Run `tree -L 2 -I 'node_modules|build|.git|.DS_Store' -A -a` then you will see b
 │ ├── containers    # containers such as HomePage, ContentPage, etc.
 │ ├── layouts       # layout such as commonLayout or ChannelLayout, etc.
 │ ├── lib           # common library, utilities such as DOM, fetch, etc.
-│ ├── modules       # Redux reducers, actions and constants
+│ ├── reducers      # Redux reducers, actions and constants
 │ ├── public        # static files to serve through http or https
 │ ├── redux         # redux store and middlewares
 │ ├── routes        # route configurations
