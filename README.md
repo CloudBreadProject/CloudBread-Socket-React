@@ -1,20 +1,10 @@
-<<<<<<< HEAD
 # CloudBread-Socket-React
-=======
-# React Universal Starter Kit
-
-[![Build Status](https://travis-ci.org/Beingbook/react-universal-starter-kit.svg?branch=master)](https://travis-ci.org/Beingbook/react-universal-starter-kit)
-[![Dependency Status](https://david-dm.org/Beingbook/react-universal-starter-kit.svg?style=flat-square)](https://david-dm.org/Beingbook/react-universal-starter-kit)
-[![devDependency Status](https://david-dm.org/Beingbook/react-universal-starter-kit/dev-status.svg?style=flat-square)](https://david-dm.org/Beingbook/react-universal-starter-kit#info=devDependencies)
-[![Code Climate](https://codeclimate.com/github/Beingbook/react-universal-starter-kit/badges/gpa.svg)](https://codeclimate.com/github/Beingbook/react-universal-starter-kit)
-[![Issue Count](https://codeclimate.com/github/Beingbook/react-universal-starter-kit/badges/issue_count.svg)](https://codeclimate.com/github/Beingbook/react-universal-starter-kit)
->>>>>>> 93d72b5c6a7acaf10878825f8e61e29627435bef
 
 [![Build Status](https://travis-ci.org/CloudBreadProject/CloudBread-Socket-React.svg?branch=master)](https://travis-ci.org/CloudBreadProject/CloudBread-Socket-React)
-[![bitHound Overall Score](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/score.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React)
-[![bitHound Dependencies](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/dependencies.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/devDependencies.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React/badges/code.svg)](https://www.bithound.io/github/CloudBreadProject/CloudBread-Socket-React)
+[![Dependency Status](https://david-dm.org/CloudBreadProject/CloudBread-Socket-React.svg?style=flat-square)](https://david-dm.org/CloudBreadProject/CloudBread-Socket-React)
+[![devDependency Status](https://david-dm.org/CloudBreadProject/CloudBread-Socket-React/dev-status.svg?style=flat-square)](https://david-dm.org/CloudBreadProject/CloudBread-Socket-React#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/CloudBreadProject/CloudBread-Socket-React/badges/gpa.svg)](https://codeclimate.com/github/CloudBreadProject/CloudBread-Socket-React)
+[![Issue Count](https://codeclimate.com/github/CloudBreadProject/CloudBread-Socket-React/badges/issue_count.svg)](https://codeclimate.com/github/CloudBreadProject/CloudBread-Socket-React)
 
 CloudBread game server real-time communication project CloudBread-Socket client example.
 This project is designed for CloudBread mobile game & app server engine to implement real-time bidirectional communication.
