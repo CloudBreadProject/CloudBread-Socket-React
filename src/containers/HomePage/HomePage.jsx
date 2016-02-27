@@ -3,8 +3,8 @@ import styles from './HomePage.scss';
 import { setTitle, socket } from 'lib/context';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { authenticateSocket } from 'modules/auth';
-import { showSnackbarMessage } from 'modules/AppLayout';
+import { authenticateSocket } from 'reducers/auth';
+import { showSnackbarMessage } from 'reducers/AppLayout';
 import {
   TextField,
   RaisedButton,

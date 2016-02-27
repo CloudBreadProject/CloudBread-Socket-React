@@ -8,8 +8,8 @@ import {
   addChannel,
   addMessage,
   addUserToChannel,
-} from 'modules/chat';
-import { showSnackbarMessage } from 'modules/AppLayout';
+} from 'reducers/chat';
+import { showSnackbarMessage } from 'reducers/AppLayout';
 import {
   Paper,
   TextField,

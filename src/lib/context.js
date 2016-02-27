@@ -1,6 +1,4 @@
 import { canUseDOM } from './env';
-import { createMemoryHistory } from 'history';
-import { browserHistory } from 'react-router';
 
 // to render Material-UI, need fake user-agent
 if (global && !global.navigator) {
@@ -11,8 +9,7 @@ if (global && !global.navigator) {
 
 let _title = '';
 let _store = null;
-export const history = canUseDOM ? browserHistory : createMemoryHistory();
-export const socket = canUseDOM ? io.connect('http://hbh-cloudbread-socket.azurewebsites.net') : null; // eslint-disable-line
+export const socket = canUseDOM ? io.connect('//hbh-cloudbread-socket.azurewebsites.net') : null; // eslint-disable-line
 
 export function initDOM(req) {
   if (!canUseDOM && req.headers['user-agent']) {
